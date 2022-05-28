@@ -12,6 +12,8 @@
 // Q: What happens if we swapped lines 6 & 7
 // A: Printing sequence will be reversed
 
+#include <iostream>
+
 void do_something(int n) {
 	if (n) {
 		std::cout << n % 10;
@@ -20,6 +22,7 @@ void do_something(int n) {
 }
 
 int main() {
-	do_something(123456);
+	do_something(123456); // prints: 654321
+	std::cin.get();
 	return 0;
 }

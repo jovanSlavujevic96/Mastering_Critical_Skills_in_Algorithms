@@ -10,12 +10,24 @@
 #include <string>
 #include <iostream>
 
+// my way
 bool is_prefix(std::string main, std::string prefix, int start_pos = 0) {
 	if (prefix.size() == start_pos) {
 		return true;
 	}
 	bool check = main[start_pos] == prefix[start_pos];
 	return check & is_prefix(main, prefix, ++start_pos);
+}
+
+// teacher's way
+bool teach_is_prefix(std::string main, std::string prefix, int start_pos = 0) {
+	if (prefix.size() == start_pos) {
+		return true;
+	}
+	if (main[start_pos] != prefix[start_pos]) {
+		return false;
+	}
+	return teach_is_prefix(main, prefix, start_pos + 1);
 }
 
 int main() {
