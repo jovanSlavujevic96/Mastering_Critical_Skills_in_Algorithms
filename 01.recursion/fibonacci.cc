@@ -16,10 +16,14 @@
 
 unsigned long long fibonacci(unsigned n) {
 	if (n <= 1) {
-		return n;
+		return 1;
 	}
 	return fibonacci(n - 1) + fibonacci(n - 2);
 }
+
+// DYNAMIC PROGRAMMING
+// memorization
+// in order to call fibonacci(50)
 
 int main() {
 	int n;
