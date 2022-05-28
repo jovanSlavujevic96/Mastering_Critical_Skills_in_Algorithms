@@ -15,9 +15,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cassert>
 
 using namespace std;
 
+// MY WAY
 void countSort(vector<string>& array) {
 	// Find the largest element of the array
 	const int size = array.size();
@@ -48,13 +50,51 @@ void countSort(vector<string>& array) {
 	}
 }
 
-int main() {
-	std::vector<std::string> input = { "xbf", "axz", "xaz", "axa", "zzz", "abc", "abe" };
-	countSort(input);
+// teacher's way
+const int LETTERS_SZ = 26;
 
-	for (std::string& in : input) {
-		std::cout << in << " ";
+// Convert a string to an index in range [0 to 26*26-1]
+int id(const string& str) {
+	assert(str.size() >= 2);
+	int f = str[0] - 'a';
+	int s = str[1] - 'a';
+
+	return f * LETTERS_SZ + s;
+}
+
+void teacher_countSort(vector<string>& array) {
+	int size = array.size();
+	int range = LETTERS_SZ * LETTERS_SZ;
+	vector<vector<string>> letter_to_strings(range);
+
+	for (int i = 0; i < size; ++i)
+		letter_to_strings[id(array[i])].push_back(array[i]);
+
+	int idx = 0;
+	for (int letter = 0; letter < range; ++letter) {
+		for (int str_idx = 0; str_idx < (int)letter_to_strings[letter].size(); ++str_idx, ++idx)
+			array[idx] = letter_to_strings[letter][str_idx];
 	}
-	std::cout << std::endl;
+}
+
+int main() {
+	{
+		std::vector<std::string> input = { "xbf", "axz", "xaz", "axa", "zzz", "abc", "abe" };
+		countSort(input);
+
+		for (std::string& in : input) {
+			std::cout << in << " ";
+		}
+		std::cout << std::endl;
+	}
+	{
+		std::vector<std::string> input = { "xbf", "axz", "xaz", "axa", "zzz", "abc", "abe" };
+		teacher_countSort(input);
+
+		for (std::string& in : input) {
+			std::cout << in << " ";
+		}
+		std::cout << std::endl;
+	}
 	return 0;
 }

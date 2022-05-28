@@ -13,6 +13,7 @@
 #include <iostream>
 #include <vector>
 
+// MY WAY
 void countSort(std::vector<int>& array) {
 	const int size = array.size();
 
@@ -49,13 +50,53 @@ void countSort(std::vector<int>& array) {
 	}
 }
 
-int main() {
-	std::vector<int> nums = { -5,2,-3,1,1234,-2453 };
-	countSort(nums);
+// teacher's way
+void sortArray(std::vector<int>& array) {
+	// Find the largest element of the array
+	int size = array.size();
+	const int SHIFT = 50000;
 
-	for (int num : nums) {
-		std::cout << num << " ";
+	for (int i = 0; i < size; ++i)
+		array[i] += SHIFT;
+
+	int max = array[0];
+	for (int i = 1; i < size; ++i)
+		if (array[i] > max)
+			max = array[i];
+
+	std::vector<int> count(max + 1);	// zeros
+
+	// Compute Frequency
+	for (int i = 0; i < size; ++i)
+		count[array[i]] += 1;
+
+	int idx = 0;
+	for (int i = 0; i <= max; ++i) {
+		for (int j = 0; j < count[i]; ++j, ++idx)
+			array[idx] = i - SHIFT;
 	}
-	std::cout << std::endl;
+}
+
+int main() {
+	{
+		std::vector<int> nums = { -5,2,-3,1,1234,-2453 };
+		countSort(nums);
+
+		// MY WAY
+		for (int num : nums) {
+			std::cout << num << " ";
+		}
+		std::cout << std::endl;
+	}
+	{
+		std::vector<int> nums = { -5,2,-3,1,1234,-2453 };
+		sortArray(nums);
+
+		// TEACHER'S WAY
+		for (int num : nums) {
+			std::cout << num << " ";
+		}
+		std::cout << std::endl;
+	}
 	return 0;
 }

@@ -34,7 +34,7 @@ void countSort(vector<int>& array) {
 	const size_t diff = std::abs(mxValue - minValue);
 
 	if (diff > LIMIT) {
-		std::cout << "difference of min & max value is " << std::abs(mxValue - minValue)
+		std::cout << "difference of min & max value is " << diff
 				  << " which is greater than " << LIMIT << std::endl;
 		return;
 	}
@@ -53,12 +53,26 @@ void countSort(vector<int>& array) {
 }
 
 int main() {
-	std::vector<int> nums = { 10'000'107, 10'000'035, 10'000'001 };
-	countSort(nums);
+	// TEST 1
+	{
+		std::vector<int> nums = { 10'000'107, 10'000'035, 10'000'001 };
+		countSort(nums);
 
-	for (int num : nums) {
-		std::cout << num << " ";
+		for (int num : nums) {
+			std::cout << num << " ";
+		}
+		std::cout << std::endl;
 	}
-	std::cout << std::endl;
+
+	// TEST 2
+	{
+		std::vector<int> nums = {-10'000'107, -10'000'035, -10'000'001 };
+		countSort(nums);
+
+		for (int num : nums) {
+			std::cout << num << " ";
+		}
+		std::cout << std::endl;
+	}
 	return 0;
 }
