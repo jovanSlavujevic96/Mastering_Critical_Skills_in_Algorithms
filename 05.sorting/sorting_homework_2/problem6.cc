@@ -31,6 +31,7 @@
 
 using namespace std;
 
+// my way
 int largestSumAfterKNegotiations(vector<int>& nums, int k) {
 	// if k is odd  number & there are no negative nums => reach   the smallest number and do it k times
 	// if k is even number & there are no negative nums => reach the any number and do it k times
@@ -66,6 +67,25 @@ int largestSumAfterKNegotiations(vector<int>& nums, int k) {
 
 	sum += nums.back();
 
+	return sum;
+}
+
+// teacher's way
+int teach_largestSumAfterKNegotiations(vector<int>& nums, int k) {
+	sort(nums.begin(), nums.end());
+	int mn = INT_MAX, sum = 0;
+
+	for (int i = 0; i < nums.size(); i++) {
+		if (k && nums[i] < 0) {
+			k--;
+			nums[i] *= -1;
+		}
+		sum += nums[i]; // sum updated array
+		mn = min(mn, nums[i]);
+	}
+	if (k % 2) {
+		sum -= 2 * mn; // Odd K: flip another number: the min
+	}
 	return sum;
 }
 

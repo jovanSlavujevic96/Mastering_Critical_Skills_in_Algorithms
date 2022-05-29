@@ -59,13 +59,6 @@ using namespace std;
 
 // MY WAY - BAD
 int eliminateMaximum(vector<int>& dist, vector<int>& speed) {
-	/*for (int i = 1; i < dist.size(); i++) {
-		for (int j = i; j - 1 >= 0 && dist[j] < dist[j - 1]; j++) {
-			std::swap(dist[j], dist[j - 1]);
-			std::swap(speed[j], speed[j - 1]);
-		}
-	}*/
-
 	int count = 0;
 	for (int i = 0; i < dist.size(); i++) {
 		int nearestIdx = i;
