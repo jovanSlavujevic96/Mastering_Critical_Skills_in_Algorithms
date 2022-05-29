@@ -7,3 +7,4 @@ add_executable(3_selection 3_selection.cpp)
 add_executable(4_count_sort 4_count_sort.cpp)
 
 add_subdirectory(sorting_homework_1)
+add_subdirectory(sorting_homework_2)
